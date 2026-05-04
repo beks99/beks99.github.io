@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The NGO of the Future — A SIVIO Institute Learning Adventure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ivory: #f5f0e8;
+    --sivio-green: #2d6a4f;
+    --sivio-green-light: #40916c;
+    --sivio-orange: #e07b39;
+    --sivio-gold: #c9a84c;
+    --warn-red: #c0392b;
+    --slate: #4a5568;
+    --paper: #faf6ef;
+    --border: #d4c9b0;
+    --shadow: rgba(26,26,46,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(ellipse at 10% 20%, rgba(45,106,79,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 90% 80%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4c9b0' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--sivio-green);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 4px solid var(--sivio-gold);
+  }
+
+  .logo-mark {
+    width: 48px; height: 48px;
+    background: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    color: var(--sivio-green);
+    font-size: 0.65rem;
+    text-align: center;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  .header-text h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.2rem;
+  }
+
+  .header-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    height: 4px;
+    background: var(--border);
+    position: relative;
+  }
+  #progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sivio-orange), var(--sivio-gold));
+    transition: width 0.6s ease;
+    width: 0%;
+  }
+
+  /* ── STATS RIBBON ── */
+  #stats-bar {
+    background: var(--ink);
+    color: white;
+    padding: 0.5rem 2rem;
+    display: flex;
+    gap: 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .stat-label { opacity: 0.6; text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat-value { 
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    transition: all 0.3s;
+  }
+  .stat-value.good { background: var(--sivio-green); color: white; }
+  .stat-value.warn { background: var(--sivio-orange); color: white; }
+  .stat-value.bad  { background: var(--warn-red); color: white; }
+
+  /* ── MAIN GAME AREA ── */
+  main {
+    max-width: 780px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── PASSAGE ── */
+  .passage {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 4px 24px var(--shadow);
+    animation: fadeSlide 0.4s ease both;
+    position: relative;
+  }
+
+  .passage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    background: var(--sivio-green);
+    border-radius: 4px 0 0 4px;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .passage-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sivio-green);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .passage-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .passage h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+
+  .passage p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #2c2c3e;
+    margin-bottom: 1rem;
+  }
+
+  .passage p:last-of-type { margin-bottom: 0; }
+
+  /* callouts */
+  .callout {
+    background: rgba(45,106,79,0.07);
+    border-left: 3px solid var(--sivio-green);
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--slate);
+  }
+
+  .callout.warn {
+    background: rgba(224,123,57,0.08);
+    border-left-color: var(--sivio-orange);
+  }
+
+  .callout.danger {
+    background: rgba(192,57,43,0.07);
+    border-left-color: var(--warn-red);
+  }
+
+  /* ── CHOICES ── */
+  .choices {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .choice-btn {
+    background: white;
+    border: 2px solid var(--sivio-green);
+    color: var(--ink);
+    padding: 1rem 1.4rem;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    transition: all 0.18s ease;
+    position: relative;
+    padding-left: 2.2rem;
+  }
+
+  .choice-btn::before {
+    content: '→';
+    position: absolute;
+    left: 0.75rem;
+    color: var(--sivio-green);
+    font-weight: 700;
+    transition: transform 0.2s;
+  }
+
+  .choice-btn:hover {
+    background: var(--sivio-green);
+    color: white;
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(45,106,79,0.25);
+  }
+
+  .choice-btn:hover::before { color: white; transform: translateX(3px); }
+
+  .choice-btn.orange {
+    border-color: var(--sivio-orange);
+  }
+  .choice-btn.orange::before { color: var(--sivio-orange); }
+  .choice-btn.orange:hover { background: var(--sivio-orange); }
+
+  /* ── LEARNING BADGE ── */
+  .learning-note {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.2rem;
+    background: rgba(201,168,76,0.12);
+    border: 1px dashed var(--sivio-gold);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    color: var(--slate);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .learning-note strong {
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── OUTCOME SCREEN ── */
+  .outcome {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .outcome-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .outcome h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .outcome.success h2 { color: var(--sivio-green); }
+  .outcome.partial h2 { color: var(--sivio-orange); }
+  .outcome.fail h2    { color: var(--warn-red); }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .score-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+  }
+
+  .score-item .score-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sivio-green);
+  }
+
+  .score-item .score-label {
+    font-size: 0.8rem;
+    color: var(--slate);
+    margin-top: 0.3rem;
+  }
+
+  .restart-btn {
+    margin-top: 1.5rem;
+    background: var(--sivio-green);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .restart-btn:hover {
+    background: var(--sivio-green-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(45,106,79,0.3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    color: var(--slate);
+    font-family: 'Space Mono', monospace;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  footer a { color: var(--sivio-green); text-decoration: none; }
+
+  /* ── CRUMB TRAIL ── */
+  #breadcrumb {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--slate);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  #breadcrumb span { opacity: 0.5; }
+
+  /* mobile */
+  @media (max-width: 600px) {
+    .passage { padding: 1.5rem 1.2rem; }
+    .passage h2 { font-size: 1.4rem; }
+    #stats-bar { gap: 0.8rem; padding: 0.5rem 1rem; font-size: 0.62rem; }
+    .score-grid { grid-template-columns: 1fr 1fr; }
+    header { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">SIVIO<br>INST.</div>
+  <div class="header-text">
+    <h1>SIVIO Institute · Training Adventure</h1>
+    <h2>The NGO of the Future: Can Yours Survive?</h2>
+  </div>
+</header>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<div id="stats-bar">
+  <div class="stat">
+    <span class="stat-label">Financial Health</span>
+    <span class="stat-value" id="stat-finance">50</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Governance</span>
+    <span class="stat-value" id="stat-governance">50</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Compliance</span>
+    <span class="stat-value" id="stat-compliance">50</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Community Trust</span>
+    <span class="stat-value" id="stat-trust">50</span>
+  </div>
+  <div class="stat">
+    <span class="stat-label">Sustainability</span>
+    <span class="stat-value" id="stat-sustain">0</span>
+  </div>
+</div>
+
+<main>
+  <div id="breadcrumb"></div>
+  <div id="passage-container"></div>
+</main>
+
+<footer>
+  Based on <em>The Future of NGOs</em> by Tendai Murisa (SIVIO Institute, March 2025) · 
+  <a href="https://schools.sivioinstitute.org" target="_blank">schools.sivioinstitute.org</a> · 
+  <a href="https://sivioinstitute.org" target="_blank">sivioinstitute.org</a>
+</footer>
+
+<script>
+// ── GAME STATE ──
+const state = {
+  finance: 50,
+  governance: 50,
+  compliance: 50,
+  trust: 50,
+  sustain: 0,
+  model: null,       // chosen sustainability model
+  history: [],
+  steps: 0
+};
+
+// ── ADJUST STATS ──
+function adjust(key, delta) {
+  state[key] = Math.max(0, Math.min(100, state[key] + delta));
+}
+
+// ── UPDATE UI ──
+function updateStats() {
+  ['finance','governance','compliance','trust','sustain'].forEach(k => {
+    const el = document.getElementById('stat-' + k);
+    const v = state[k];
+    el.textContent = v;
+    el.className = 'stat-value ' + (v >= 65 ? 'good' : v >= 35 ? 'warn' : 'bad');
+  });
+  const progress = Math.min(100, (state.steps / 14) * 100);
+  document.getElementById('progress-fill').style.width = progress + '%';
+}
+
+function setBreadcrumb(trail) {
+  document.getElementById('breadcrumb').innerHTML = trail
+    .map((t,i) => i < trail.length-1 ? `<span>${t} › </span>` : t)
+    .join('');
+}
+
+// ── RENDER PASSAGE ──
+function render(passageId) {
+  state.steps++;
+  const p = passages[passageId];
+  if (!p) { console.error('Missing passage:', passageId); return; }
+  state.history.push(passageId);
+  if (p.onEnter) p.onEnter();
+  updateStats();
+
+  const container = document.getElementById('passage-container');
+  container.innerHTML = '';
+  const div = document.createElement('div');
+  div.className = 'passage';
+  div.innerHTML = buildPassageHTML(p);
+  container.appendChild(div);
+
+  if (p.breadcrumb) setBreadcrumb(p.breadcrumb);
+
+  // wire up buttons
+  div.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      if (btn.dataset.effect) {
+        const effects = JSON.parse(btn.dataset.effect);
+        Object.entries(effects).forEach(([k,v]) => adjust(k, v));
+      }
+      if (btn.dataset.model) state.model = btn.dataset.model;
+      render(target);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+function buildPassageHTML(p) {
+  let html = '';
+  if (p.tag) html += `<div class="passage-tag">${p.tag}</div>`;
+  if (p.title) html += `<h2>${p.title}</h2>`;
+  if (p.body) html += p.body;
+  if (p.note) html += `<div class="learning-note"><strong>📖 Learning Note</strong>${p.note}</div>`;
+  if (p.choices && p.choices.length) {
+    html += '<div class="choices">';
+    p.choices.forEach(c => {
+      const fx = c.effect ? ` data-effect='${JSON.stringify(c.effect)}'` : '';
+      const model = c.model ? ` data-model="${c.model}"` : '';
+      const cls = c.style ? ` ${c.style}` : '';
+      html += `<button class="choice-btn${cls}" data-target="${c.target}"${fx}${model}>${c.text}</button>`;
+    });
+    html += '</div>';
+  }
+  return html;
+}
+
+// ── OUTCOME HELPER ──
+function outcomeHTML(type, icon, title, body) {
+  return `
+  <div class="outcome ${type}">
+    <div class="outcome-icon">${icon}</div>
+    <h2>${title}</h2>
+    <p>${body}</p>
+    <div class="score-grid">
+      <div class="score-item"><div class="score-val">${state.finance}</div><div class="score-label">Financial Health</div></div>
+      <div class="score-item"><div class="score-val">${state.governance}</div><div class="score-label">Governance</div></div>
+      <div class="score-item"><div class="score-val">${state.compliance}</div><div class="score-label">Compliance</div></div>
+      <div class="score-item"><div class="score-val">${state.trust}</div><div class="score-label">Community Trust</div></div>
+      <div class="score-item"><div class="score-val">${state.sustain}</div><div class="score-label">Sustainability Score</div></div>
+    </div>
+    <p><strong>Your model:</strong> ${state.model || 'Undecided'}</p>
+    <button class="restart-btn" onclick="restartGame()">▶ Play Again</button>
+    <p style="margin-top:1.2rem;font-size:0.85rem;color:#666;">
+      Explore the full courses at 
+      <a href="https://schools.sivioinstitute.org" target="_blank" style="color:#2d6a4f">SIVIO Institute Online School</a>
+    </p>
+  </div>`;
+}
+
+function restartGame() {
+  state.finance = 50; state.governance = 50; state.compliance = 50;
+  state.trust = 50; state.sustain = 0; state.model = null;
+  state.history = []; state.steps = 0;
+  updateStats();
+  render('start');
+}
+
+// ══════════════════════════════════════
+// ── PASSAGES ──
+// ══════════════════════════════════════
+const passages = {
+
+  // ────────────────────────────────────
+  // OPENING
+  // ────────────────────────────────────
+  start: {
+    tag: 'Prologue · The Funding Crisis',
+    breadcrumb: ['The NGO of the Future'],
+    title: 'It Is 2025. Your NGO Just Lost Its Biggest Funder.',
+    body: `
+      <p>You lead <strong>Umoja Development Trust</strong> — a mid-sized NGO based in Harare, working on governance, health access, and rural livelihoods across Zimbabwe and the region.</p>
+      <p>This morning you received an email. USAID has closed. Your three-year grant — $450,000 — is cancelled, effective in 60 days.</p>
+      <p>You are not alone. Across Africa, the top recipients of US aid in 2023 alone included Ethiopia ($1.75bn), Nigeria ($1.01bn), and DRC ($0.98bn). Organisations like yours are scrambling. Eight wealthy nations cut aid by a combined $17 billion in 2024 alone.</p>
+      <div class="callout">
+        "Could this be the end of an era for NGOs? Or the beginning of a new one?"<br>
+        — Tendai Murisa, <em>The Future of NGOs</em> (SIVIO Institute, 2025)
+      </div>
+      <p>You have 60 days to make critical decisions. The board is watching. The community is depending on you. What do you do first?</p>
+    `,
+    note: 'USAID contributed more to African civil society than any other single donor. Its closure triggered a domino effect — even donors who remain are under pressure to cut and cannot fill the gap.',
+    choices: [
+      { text: 'Call an emergency board meeting to assess the situation', target: 'board_meeting', effect: { governance: 10 } },
+      { text: 'Immediately start searching for replacement grants online', target: 'grant_search_first', effect: { finance: -5, governance: -5 } },
+      { text: 'Reach out to your community stakeholders first', target: 'community_first', effect: { trust: 10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // BRANCH A: BOARD MEETING
+  // ────────────────────────────────────
+  board_meeting: {
+    tag: 'Act I · Governance',
+    breadcrumb: ['The NGO of the Future', 'Governance'],
+    title: 'The Board Convenes. You Need the Right People in the Room.',
+    body: `
+      <p>Your board meets over video call. Eight people. A mix of lawyers, community leaders, and a retired banker. The energy is tense.</p>
+      <p>The chair opens: <em>"We have 60 days of runway. We need a plan. But first — do we have the right team to execute one?"</em></p>
+      <p>She's right. Sustainable organisations need specific expertise the report identifies clearly. Three roles are critical right now:</p>
+      <ul style="margin: 1rem 0 1rem 1.5rem; line-height: 2;">
+        <li><strong>Resource Mobilisation Expert</strong> — to find and close new funding streams</li>
+        <li><strong>Financial Management Expert</strong> — to restructure spending and manage the transition</li>
+        <li><strong>Research/Knowledge Expert</strong> — to produce the evidence that attracts funders and community trust</li>
+      </ul>
+      <p>But you can only hire or promote one immediately with your remaining budget. Who do you prioritise?</p>
+    `,
+    note: 'Good governance means matching your team structure to your strategic context. When funding is the survival challenge, resource mobilisation expertise is not a luxury — it is a core operational function.',
+    choices: [
+      { text: 'Promote your grants officer to Head of Resource Mobilisation — your survival depends on new income', target: 'hire_resource_mob', effect: { finance: 15, governance: 5 } },
+      { text: 'Bring in a financial management expert to restructure spending and cut costs urgently', target: 'hire_finance', effect: { finance: 10, governance: 10 } },
+      { text: 'Invest in your research team — strong evidence attracts funders and builds credibility', target: 'hire_research', effect: { trust: 10, governance: 5 } },
+    ]
+  },
+
+  hire_resource_mob: {
+    tag: 'Act I · Governance',
+    breadcrumb: ['The NGO of the Future', 'Governance', 'Resource Mobilisation'],
+    title: 'Smart Call. Now Your Mobiliser Needs a Strategy.',
+    body: `
+      <p>Thembi is sharp. Within a week she maps every funder active in your sector, flags three active calls for proposals, and identifies two regional foundations you had never approached.</p>
+      <p>But she raises an uncomfortable truth: <em>"We've been chasing grants for years without a clear pitch. We tell donors what we do, not what we change. We need to reframe."</em></p>
+      <div class="callout">
+        The NGO of the future must be able to <strong>tell its impact story</strong>. Very few organisations have invested in communicating the change they are making. Stories should reflect ground-level impact and leverage digital channels.
+      </div>
+      <p>Your board approves a 30-day communications sprint. But there's a fork in the road. Your compliance officer just flagged something urgent: Zimbabwe's parliament is debating a new NGO Registration Amendment Bill that would require all foreign-funded NGOs to re-register under stricter rules within 90 days.</p>
+      <p>How do you respond?</p>
+    `,
+    note: 'Impact storytelling is not a communications add-on — it is a fundraising tool. Funders and individual donors respond to evidence of real change, not project activity reports.',
+    choices: [
+      { text: 'Deal with compliance first — legal risks could shut you down before fundraising succeeds', target: 'compliance_bill', effect: { compliance: 15, finance: -5 } },
+      { text: 'Push forward with fundraising — the bill is not passed yet, time is the bigger threat', target: 'fundraising_push', effect: { finance: 10, compliance: -10 } },
+    ]
+  },
+
+  hire_finance: {
+    tag: 'Act I · Governance',
+    breadcrumb: ['The NGO of the Future', 'Governance', 'Financial Management'],
+    title: 'The Finance Expert Arrives. The News Is Sobering.',
+    body: `
+      <p>Solomon spends two weeks in the accounts. Then he calls you into a meeting you'd been dreading.</p>
+      <p><em>"You're spending 38% of every dollar on overhead. Donor compliance requirements drove that — the reporting, the audits, the M&E systems. That has to change."</em></p>
+      <p>The NGO of the future must return to lean structures. Overhead costs should be below 10% of budget. Right now you have 23 staff. Solomon recommends restructuring to 14, with three staff redeployed to income-generating activities.</p>
+      <div class="callout warn">
+        NGOs built around donor compliance requirements often become expensive bureaucracies that mirror the large INGOs they once criticised. The crisis is an opportunity to reset.
+      </div>
+      <p>The restructuring is painful. Two programme officers will be let go. But it creates space to invest in sustainability. Do you proceed?</p>
+    `,
+    note: 'Overhead ratios matter to individual donors and community funders. Demonstrating that change is delivered at low cost is a competitive advantage — not just a donor requirement.',
+    choices: [
+      { text: 'Accept the restructuring plan — sustainability requires hard choices', target: 'restructure_accept', effect: { finance: 20, trust: -5, governance: 5 } },
+      { text: 'Seek a middle path — protect staff, find savings elsewhere', target: 'restructure_soften', effect: { finance: 8, trust: 5, governance: 5 } },
+    ]
+  },
+
+  hire_research: {
+    tag: 'Act I · Governance',
+    breadcrumb: ['The NGO of the Future', 'Governance', 'Knowledge Generation'],
+    title: 'Knowledge Is Power — and Revenue.',
+    body: `
+      <p>Dr. Chikwanda joins as Research Lead. She immediately proposes something that surprises the board: <em>"Our reports, our data, our convening power — these are products. Let's start treating them that way."</em></p>
+      <p>She drafts a knowledge monetisation strategy. Paid access to policy briefs. A subscription newsletter for government ministries, corporates, and CSOs. A regional data partnership with two universities.</p>
+      <div class="callout">
+        NGOs can generate income by <strong>monetising knowledge products</strong> — charging for reports, ensuring paid access to online platforms, and securing sponsors for services.
+      </div>
+      <p>But the strategy needs 6 months to generate revenue. In the meantime, your compliance officer has flagged new NGO legislation. How do you respond?</p>
+    `,
+    note: 'Research and knowledge generation can serve dual purposes: building credibility with funders AND becoming a direct income stream through subscriptions, paid briefs, and commissioned research.',
+    choices: [
+      { text: 'Address the compliance issue immediately', target: 'compliance_bill', effect: { compliance: 15 } },
+      { text: 'Accelerate the knowledge revenue strategy — 6 months is too long, find shortcuts', target: 'knowledge_revenue', effect: { finance: 10, trust: 10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // BRANCH B: COMMUNITY FIRST
+  // ────────────────────────────────────
+  community_first: {
+    tag: 'Act I · Community Trust',
+    breadcrumb: ['The NGO of the Future', 'Community First'],
+    title: 'You Go to the People. What You Find Surprises You.',
+    body: `
+      <p>You travel to Mutoko district, where Umoja has run a rural livelihoods programme for 8 years. You call a community meeting under the msasa trees.</p>
+      <p>You expect sympathy. What you get is something more useful: ideas.</p>
+      <p>Three community leaders speak one after another. A woman who runs the village savings group. A returned diaspora member who sends money home monthly. A young man who uses EcoCash daily and knows digital platforms inside-out.</p>
+      <div class="callout">
+        "Communities have assets that range from skills, natural resources, social capital and a willingness to mobilise financial resources for a public good from within and from the diaspora."<br>
+        — <em>The Future of NGOs</em>
+      </div>
+      <p>The community-embedded NGO model is right in front of you. But to build it properly, you still need governance and team structures. You head back to Harare and convene the board.</p>
+    `,
+    note: 'Community foundations have demonstrated that local assets — social capital, diaspora networks, mobile payments — can anchor sustainable NGO funding. The first step is listening, not pitching.',
+    choices: [
+      { text: 'Proceed to the board meeting to build on what you learned', target: 'board_meeting', effect: { trust: 5, governance: 5 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // GRANT SEARCH FIRST (bad path)
+  // ────────────────────────────────────
+  grant_search_first: {
+    tag: 'Act I · Caution',
+    breadcrumb: ['The NGO of the Future', 'Grant Search'],
+    title: 'Twelve Applications. Zero Responses. Four Weeks Gone.',
+    body: `
+      <p>You spend the first month blasting out proposals to every open call you find. Template after template. Your team is exhausted. The deadline pressure is creating mistakes.</p>
+      <p>Then a rejection arrives with a note: <em>"We appreciate your submission but are prioritising organisations with demonstrated income diversification strategies."</em></p>
+      <div class="callout danger">
+        Organisations that rely on a single donor and respond to crisis by seeking a replacement single donor repeat the same fragility. Funders increasingly favour organisations demonstrating long-term sustainability plans.
+      </div>
+      <p>You've lost four weeks. You need a better strategy. A colleague calls to advise: convene your board, build a proper plan.</p>
+    `,
+    note: 'Reactive grant-chasing without a sustainability strategy is a trap. The funding landscape has changed — funders now want to see diversification, not dependency transfer.',
+    choices: [
+      { text: 'Regroup — convene the board and build a proper plan', target: 'board_meeting', effect: { governance: 5, finance: -10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // COMPLIANCE BRANCH
+  // ────────────────────────────────────
+  compliance_bill: {
+    tag: 'Act II · Legal Environment',
+    breadcrumb: ['The NGO of the Future', 'Compliance'],
+    title: 'New Legislation. You Have 90 Days to Comply or Close.',
+    body: `
+      <p>The NGO Registration Amendment Bill passes. Umoja Trust, as a foreign-funded organisation, must re-register, submit new governance documentation, disclose all funding sources quarterly, and appoint a local compliance officer approved by the Registrar.</p>
+      <p>Countries like Malawi, Tanzania, Zambia, and Zimbabwe have passed or are passing laws that make it harder for NGOs to operate. This is your reality now.</p>
+      <div class="callout warn">
+        The NGO sector faces not only a funding threat but also a legal threat in several African countries. Compliance is no longer optional — and the consequences of failure are existential.
+      </div>
+      <p>Your legal advisor gives you three options for your compliance strategy:</p>
+    `,
+    note: 'Regulatory compliance is a governance function, not just an administrative one. Boards must understand the legal environment and have clear protocols for legislative changes.',
+    choices: [
+      { text: 'Full compliance: hire a dedicated compliance officer, update all documentation, engage regulators proactively', target: 'full_compliance', effect: { compliance: 25, finance: -10, governance: 10 } },
+      { text: 'Minimum compliance: do only what is legally required, challenge ambiguous clauses', target: 'min_compliance', effect: { compliance: 10, finance: 0 } },
+      { text: 'Join the NGO sector coalition lobbying to amend the most restrictive clauses', target: 'advocacy_compliance', effect: { compliance: 15, trust: 10, governance: 5 } },
+    ]
+  },
+
+  full_compliance: {
+    tag: 'Act II · Legal Environment',
+    breadcrumb: ['The NGO of the Future', 'Compliance', 'Full Compliance'],
+    title: 'Compliant. Now Leverage It.',
+    body: `
+      <p>Three months of paperwork, meetings with the Registrar, and a new compliance officer later — Umoja is fully registered under the new framework. You're one of the first.</p>
+      <p>Unexpectedly, this becomes a trust signal. Two funders specifically mention your compliance record in their shortlisting notes. A corporate partner says: <em>"We only work with NGOs who are clean with government."</em></p>
+      <div class="callout">
+        Compliance is not just risk management — in a tightening regulatory environment, it becomes a competitive advantage and a prerequisite for corporate partnerships.
+      </div>
+      <p>Now that compliance is secured, it's time to focus on the most critical question: how will Umoja sustain itself without donor dependency?</p>
+    `,
+    choices: [
+      { text: 'Proceed to choosing a sustainability model', target: 'sustainability_intro', effect: { governance: 5, trust: 5 } },
+    ]
+  },
+
+  min_compliance: {
+    tag: 'Act II · Legal Environment',
+    breadcrumb: ['The NGO of the Future', 'Compliance', 'Minimum Compliance'],
+    title: 'You Comply — Barely. A Risk Lingers.',
+    body: `
+      <p>Umoja submits the minimum required documentation. You pass the initial review. But three months later, the Registrar's office sends a query about your governance records from 2022.</p>
+      <p>The query takes 6 weeks to resolve. During that time, one prospective funder puts your application on hold, citing "unresolved regulatory status."</p>
+      <div class="callout warn">
+        Minimum compliance saves short-term costs but creates long-term uncertainty. In a tightening regulatory environment, gaps become liabilities.
+      </div>
+      <p>The issue resolves itself, but the delay costs you. You've learned a lesson. Now focus on sustainability.</p>
+    `,
+    choices: [
+      { text: 'Move forward to building a sustainability model', target: 'sustainability_intro', effect: { finance: -5, compliance: -5 } },
+    ]
+  },
+
+  advocacy_compliance: {
+    tag: 'Act II · Legal Environment',
+    breadcrumb: ['The NGO of the Future', 'Compliance', 'Sector Advocacy'],
+    title: 'You Join the Coalition. Unexpected Benefits Follow.',
+    body: `
+      <p>Umoja joins a 23-organisation coalition challenging the most restrictive clauses of the new Act. You draft a position paper. Your research team leads the evidence base.</p>
+      <p>Three clauses are amended before final implementation. The coalition meeting introduces you to five organisations you had never collaborated with. Two become partners. One shares a database of regional individual donors that changes your fundraising outlook.</p>
+      <div class="callout">
+        "Collaboration is the heartbeat of social change." Organisations that shift from competition to peer collaboration are more likely to raise resources, achieve broader change, and survive crises.
+      </div>
+      <p>The legal battle is won — partially. And Umoja's profile in the sector has never been higher. Now, to sustainability.</p>
+    `,
+    choices: [
+      { text: 'Move to choosing your sustainability model', target: 'sustainability_intro', effect: { trust: 15, governance: 5 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // FUNDRAISING PUSH (compliance skipped)
+  // ────────────────────────────────────
+  fundraising_push: {
+    tag: 'Act II · Risk',
+    breadcrumb: ['The NGO of the Future', 'Fundraising Push'],
+    title: 'You Land a Grant. Then the Registrar Calls.',
+    body: `
+      <p>Your gamble half-pays off. You secure a $120,000 grant from a European foundation. The relief is enormous. Staff morale lifts.</p>
+      <p>Then the letter arrives. The Registrar's office has flagged Umoja for non-compliance with the new NGO Amendment Act. You have 30 days to respond or face suspension.</p>
+      <p>The grant is now on hold — the foundation won't disburse to a suspended organisation.</p>
+      <div class="callout danger">
+        Regulatory compliance cannot be deferred. Legal exposure can freeze funding, damage reputation, and — in extreme cases — result in forced closure.
+      </div>
+      <p>You resolve the compliance issue at double the cost of addressing it proactively. The grant eventually disburses, 4 months late. An expensive lesson.</p>
+    `,
+    note: 'In countries tightening NGO regulations, compliance is a prerequisite for every other strategy. Skipping it to focus on fundraising is a false economy.',
+    choices: [
+      { text: 'With compliance resolved (expensively), move to sustainability planning', target: 'sustainability_intro', effect: { compliance: 10, finance: -15 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // KNOWLEDGE REVENUE
+  // ────────────────────────────────────
+  knowledge_revenue: {
+    tag: 'Act II · Knowledge Economy',
+    breadcrumb: ['The NGO of the Future', 'Knowledge Revenue'],
+    title: 'Your Research Becomes a Product.',
+    body: `
+      <p>Dr. Chikwanda moves fast. Within 8 weeks, Umoja launches a paid policy brief subscription at $150/year targeting government ministries, corporations, and other NGOs. Forty-two subscribers in the first month.</p>
+      <p>A regional bank commissions a custom research report on smallholder finance in Zimbabwe. $28,000. A university partnership is signed.</p>
+      <p>The knowledge economy model is working — but it requires consistent, credible research output. You need to protect that investment.</p>
+      <div class="callout">
+        Knowledge monetisation works when the NGO already has genuine expertise and credibility. It is not suitable for all organisations — but where expertise exists, it can generate reliable recurring revenue.
+      </div>
+      <p>Now you need to choose an overall sustainability model to anchor Umoja's future.</p>
+    `,
+    choices: [
+      { text: 'Proceed to the sustainability model selection', target: 'sustainability_intro', effect: { finance: 15, trust: 10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // RESTRUCTURE PATHS
+  // ────────────────────────────────────
+  restructure_accept: {
+    tag: 'Act II · Restructuring',
+    breadcrumb: ['The NGO of the Future', 'Restructuring'],
+    title: 'Painful but Necessary. The Leaner Umoja Emerges.',
+    body: `
+      <p>Two programme officers receive redundancy packages. It is the hardest meeting you've ever chaired. Three more staff are redeployed to an income-generating pilot initiative.</p>
+      <p>Solomon's revised budget brings overhead to 14%. Still above target, but the trajectory is right. The board approves a 90-day review.</p>
+      <p>One of the redeployed staff, a former M&E officer, turns out to be an exceptional communicator. She launches Umoja's impact storytelling programme. Within a month, a short video about a rural water project has 12,000 views and attracts three unsolicited donations.</p>
+      <div class="callout">
+        The future belongs to lean, nimble structures that allow for quick and responsive decision-making. The model that was popular because it could deliver change at low cost must be rediscovered.
+      </div>
+      <p>The restructuring is complete. Now — what model will sustain Umoja going forward?</p>
+    `,
+    choices: [
+      { text: 'Proceed to choosing a sustainability model', target: 'sustainability_intro' },
+    ]
+  },
+
+  restructure_soften: {
+    tag: 'Act II · Restructuring',
+    breadcrumb: ['The NGO of the Future', 'Restructuring'],
+    title: 'A Gentler Restructuring. Some Trade-offs Ahead.',
+    body: `
+      <p>Instead of redundancies, you implement a voluntary salary reduction of 12% for management (including yourself), freeze non-essential travel, and renegotiate the office lease.</p>
+      <p>Overhead drops to 22%. Not ideal, but the team stays intact. Staff morale is preserved. The community hears that Umoja didn't let people go — and that builds something unexpected: increased volunteer support.</p>
+      <div class="callout">
+        Community trust is a form of capital. Organisations that are seen to protect their people often gain social capital that translates into partnerships, referrals, and volunteer support.
+      </div>
+      <p>The savings are smaller but the goodwill is real. Now, the sustainability question remains: how does Umoja fund itself going forward?</p>
+    `,
+    choices: [
+      { text: 'Proceed to choosing a sustainability model', target: 'sustainability_intro' },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // SUSTAINABILITY MODEL INTRO
+  // ────────────────────────────────────
+  sustainability_intro: {
+    tag: 'Act III · Sustainability',
+    breadcrumb: ['The NGO of the Future', 'Sustainability'],
+    title: 'The Biggest Decision: How Will Umoja Fund Itself?',
+    body: `
+      <p>You've stabilised governance, addressed compliance, and restructured. Now comes the strategic core of Umoja's survival: choosing a sustainable funding model.</p>
+      <p>Donor aid is not disappearing entirely — but it will be reduced, unreliable, and increasingly contested. You cannot build a future on it alone.</p>
+      <p>Based on global and African best practices, the SIVIO Institute's research identifies five viable paths:</p>
+      <div class="callout">
+        <strong>The five models from <em>The Future of NGOs</em>:</strong><br><br>
+        🏘️ <strong>Community Embedded</strong> — local assets, diaspora networks, village savings<br>
+        👥 <strong>Membership Based</strong> — subscription-paying members as your budget foundation<br>
+        🏢 <strong>Corporate Sponsored</strong> — shared value partnerships with private sector<br>
+        💼 <strong>Income Generating</strong> — social enterprise and commercial activities<br>
+        📢 <strong>Cause / Individual Giving</strong> — campaigns, digital fundraising, African middle class<br>
+        🔀 <strong>Hybrid</strong> — combining two or three of the above
+      </div>
+      <p>Which model best fits Umoja's strengths, context, and mission?</p>
+    `,
+    note: 'No single model works for every NGO. The right choice depends on your mission, community, expertise, and capacity. The hybrid approach is often the most resilient.',
+    choices: [
+      { text: '🏘️ Community Embedded — build on local assets and diaspora connections', target: 'model_community', model: 'Community Embedded NGO' },
+      { text: '👥 Membership Based — build a subscription community of supporters', target: 'model_membership', model: 'Membership-Based NGO' },
+      { text: '💼 Income Generating — launch a social enterprise to cross-subsidise the mission', target: 'model_social_enterprise', model: 'Income-Generating NGO / Social Enterprise' },
+      { text: '📢 Individual Giving — harness Africa\'s rising middle class and diaspora donors', target: 'model_individual_giving', model: 'Individual Giving / Cause-Driven NGO' },
+      { text: '🔀 Hybrid — deliberately combine membership + individual giving + one income stream', target: 'model_hybrid', model: 'Hybrid NGO', style: 'orange' },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // MODEL: COMMUNITY EMBEDDED
+  // ────────────────────────────────────
+  model_community: {
+    tag: 'Act III · Community Embedded Model',
+    breadcrumb: ['The NGO of the Future', 'Sustainability', 'Community Embedded'],
+    title: 'Umoja Embeds Itself at the Heart of Community Life.',
+    body: `
+      <p>You restructure Umoja around the community foundations model. Your Mutoko programme becomes a pilot: a community resource mobilisation hub where the NGO serves as an <em>aggregator platform</em> rather than a service provider.</p>
+      <p>The village savings group, the diaspora WhatsApp group (127 members), and the local farmers' association all become formal Umoja partners. Each contributes in kind, cash, or expertise.</p>
+      <p>Within a year, the Mutoko hub raises $34,000 locally — not enough to replace the USAID grant, but a foundation that's entirely non-donor-dependent.</p>
+      <div class="callout">
+        Community foundations have demonstrated that resources exist in communities — skills, natural resources, social capital, and diaspora financial contributions. The key is becoming the trusted aggregator that unlocks them.
+      </div>
+      <p>A visiting foundation program officer watches a community meeting and decides to fund Umoja's model documentation — not to run the programme, but to capture the methodology. $65,000.</p>
+      <p>The community-embedded model works. But it requires patience and genuine trust — assets that can't be manufactured.</p>
+    `,
+    note: 'The community-embedded model is most powerful for NGOs with long-term community relationships. It will not generate revenue overnight — but it creates the most durable foundation.',
+    choices: [
+      { text: 'Proceed to the final chapter', target: 'final_chapter', effect: { trust: 20, sustain: 30, finance: 10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // MODEL: MEMBERSHIP
+  // ────────────────────────────────────
+  model_membership: {
+    tag: 'Act III · Membership Model',
+    breadcrumb: ['The NGO of the Future', 'Sustainability', 'Membership'],
+    title: 'You Build a Movement, Not Just a Mailing List.',
+    body: `
+      <p>Umoja has always served communities without asking them to invest back. That changes now.</p>
+      <p>You launch a tiered membership programme: Community Members ($5/month), Professional Members ($25/month), and Institutional Members ($200/month). Members get early access to research, invitations to policy dialogues, and voting rights in programme prioritisation.</p>
+      <div class="callout">
+        "The significance of membership contributions declined in terms of the share of the budget" as NGOs chased donor compliance. Reversing this means putting members genuinely at the centre — not as passive recipients but as decision-makers.
+      </div>
+      <p>Month one: 220 members. Month six: 890 members. A professional network of governance practitioners joins as Institutional Members — 14 organisations at $200/month each.</p>
+      <p>Total recurring monthly revenue after 12 months: $12,400. Predictable. Owned. Growing.</p>
+      <p>The board adopts a rule: no single funder — including individual member tiers — can exceed 40% of budget. Dependency is now structurally prevented.</p>
+    `,
+    note: 'The membership model works best when members feel genuine ownership — voting rights, co-designed programmes, and access to exclusive value. Tokenistic subscriptions with no real engagement tend to fail.',
+    choices: [
+      { text: 'Proceed to the final chapter', target: 'final_chapter', effect: { trust: 15, sustain: 35, finance: 15, governance: 10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // MODEL: SOCIAL ENTERPRISE
+  // ────────────────────────────────────
+  model_social_enterprise: {
+    tag: 'Act III · Social Enterprise',
+    breadcrumb: ['The NGO of the Future', 'Sustainability', 'Social Enterprise'],
+    title: 'Umoja Launches a For-Profit Arm. A Bold Move.',
+    body: `
+      <p>You establish <strong>Umoja Consulting (Pvt) Ltd</strong> — a separate for-profit entity that offers governance audits, M&E services, and policy advisory to government agencies and corporations across the region.</p>
+      <p>The logic is clear: Umoja's staff already do this work for free as part of donor-funded projects. Now you'll do it for a fee in the commercial market and use the profit to cross-subsidise the mission.</p>
+      <div class="callout">
+        "There are no shareholders in a non-profit organisation — profits from a related social enterprise are completely re-invested in the work of the organisation." The social enterprise model allows market principles — competition, innovation, focus on the bottom line — to coexist with public interest values.
+      </div>
+      <p>Year one revenues: $95,000. Year two target: $180,000. The consulting arm funds 40% of Umoja's core operations within 18 months.</p>
+      <p>A risk emerges: the consulting work begins to attract more staff time than the mission work. You implement a 60/40 rule — no more than 40% of any team member's time on commercial activities.</p>
+    `,
+    note: 'Social enterprise works best when the commercial activity is genuinely connected to mission expertise. Unrelated commercial ventures often distract from mission and create management complexity.',
+    choices: [
+      { text: 'Proceed to the final chapter', target: 'final_chapter', effect: { finance: 25, sustain: 30, trust: 5 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // MODEL: INDIVIDUAL GIVING
+  // ────────────────────────────────────
+  model_individual_giving: {
+    tag: 'Act III · Individual Giving',
+    breadcrumb: ['The NGO of the Future', 'Sustainability', 'Individual Giving'],
+    title: 'Harnessing Africa\'s Rising Middle Class and Diaspora.',
+    body: `
+      <p>Africa has the world's highest mobile money penetration. Its middle class is growing. Millennials and Gen Zs across the continent and diaspora are more likely to give to causes they believe in.</p>
+      <p>Umoja launches a structured individual giving programme, partnering with <strong>AfricaGiving.org</strong> and setting up its own EcoCash giving page. You train two staff as digital fundraisers.</p>
+      <div class="callout">
+        "Studies have shown that millennials and Gen Zs are more likely to contribute to causes via financial gifts. The fact that Africa has the highest penetration of mobile-based financial technology suggests the ease of using digital platforms to raise funds."
+      </div>
+      <p>You run a campaign: <em>"Keep Mutoko's Water Running"</em>. A 2-minute video. A clear ask. A 30-day timeline. 847 donors. $23,400 raised — including $8,200 from diaspora donors in the UK, South Africa, and Canada.</p>
+      <p>The model is working. Retention becomes the challenge: you need to convert one-time donors into recurring givers. A quarterly impact newsletter launches. Donor retention climbs to 34%.</p>
+    `,
+    note: 'Individual giving requires investment in storytelling, digital infrastructure, and donor retention. The SIVIO Institute\'s Individual Giving masterclass on Udemy covers the full cycle from campaign design to recurring giving strategies.',
+    choices: [
+      { text: 'Proceed to the final chapter', target: 'final_chapter', effect: { trust: 20, sustain: 30, finance: 15 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // MODEL: HYBRID
+  // ────────────────────────────────────
+  model_hybrid: {
+    tag: 'Act III · Hybrid Model',
+    breadcrumb: ['The NGO of the Future', 'Sustainability', 'Hybrid'],
+    title: 'The Hybrid: Umoja Refuses to Bet on a Single Horse.',
+    body: `
+      <p>You choose deliberate hybridity. Three streams, structured so none exceeds 40% of budget:</p>
+      <ol style="margin: 1rem 0 1rem 1.5rem; line-height: 2.2;">
+        <li><strong>Membership subscriptions</strong> — 340 paying members in month 6, generating $4,800/month</li>
+        <li><strong>Individual giving campaigns</strong> — quarterly campaigns targeting diaspora and local middle class via AfricaGiving and EcoCash</li>
+        <li><strong>Knowledge products</strong> — paid policy brief subscriptions and commissioned research</li>
+      </ol>
+      <div class="callout">
+        "The fluidity of the emerging context will require that many organisations adopt a hybrid posture with the capability to straddle different models without compromising on the need to achieve their mission."
+      </div>
+      <p>Month 12 results: 38% of Umoja's budget is now self-generated. Donor dependency has dropped from 100% to 62%. The trajectory shows 50% self-sufficiency by year two.</p>
+      <p>More importantly, the three streams reinforce each other: members become campaign donors, campaign donors become members, and research subscribers recommend Umoja to their networks.</p>
+    `,
+    note: 'The hybrid model is most resilient but most complex to manage. It requires organisational clarity — what are we doing, why, and how does each stream serve the mission?',
+    choices: [
+      { text: 'Proceed to the final chapter', target: 'final_chapter', effect: { trust: 15, sustain: 45, finance: 20, governance: 10 } },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // FINAL CHAPTER
+  // ────────────────────────────────────
+  final_chapter: {
+    tag: 'Epilogue · The New Era',
+    breadcrumb: ['The NGO of the Future', 'Epilogue'],
+    title: 'Two Years Later. Umoja Stands.',
+    onEnter: function() {
+      // calculate final sustainability score
+      const base = state.sustain;
+      const bonus = Math.round((state.finance + state.governance + state.compliance + state.trust - 200) / 4);
+      adjust('sustain', bonus);
+    },
+    body: `
+      <p>Two years after the USAID closure, Umoja Development Trust is still standing. More than that — it is different. Leaner. More rooted. More honest about what it is and who it serves.</p>
+      <p>You present to a regional CSO convening in Lusaka. Your slide shows something remarkable: for the first time in Umoja's history, more than half its budget comes from African sources — community, individuals, membership, or earned income.</p>
+      <div class="callout">
+        "Can this moment lead to the emergence of a more reliable development- and democracy-focused agency, with capabilities to navigate and balance the achievement of the mission together with its own long-term financial sustainability?"<br>
+        — Tendai Murisa, <em>The Future of NGOs</em>
+      </div>
+      <p>There is still a role for NGOs in Africa. The governance crisis, the climate emergency, the democracy deficit — these are not solved. But the NGO of the future must be different from the NGO of the past.</p>
+      <p>Umoja's story is just beginning.</p>
+    `,
+    choices: [
+      { text: 'See your final results and scores →', target: 'outcome_final' },
+    ]
+  },
+
+  // ────────────────────────────────────
+  // OUTCOME
+  // ────────────────────────────────────
+  outcome_final: {
+    tag: 'Results',
+    breadcrumb: ['The NGO of the Future', 'Results'],
+    title: '',
+    body: '', // generated dynamically
+    onEnter: function() {
+      // generate outcome based on stats
+      let type, icon, title, body;
+      const avg = (state.finance + state.governance + state.compliance + state.trust) / 4;
+      if (state.sustain >= 50 && avg >= 60) {
+        type = 'success'; icon = '🌱';
+        title = 'Sustainable. Umoja Has a Future.';
+        body = `You made the hard decisions at the right times. Governance was strengthened, compliance was addressed, and you chose a sustainability model that builds on Umoja's real strengths. The NGO of the future is not built on hope — it is built on deliberate strategy, community trust, and the courage to change. Umoja now demonstrates what is possible.`;
+      } else if (state.sustain >= 30 || avg >= 50) {
+        type = 'partial'; icon = '⚖️';
+        title = 'Resilient, But Vulnerabilities Remain.';
+        body = `Umoja survived the funding crisis and made progress on sustainability. But some decisions left gaps — in compliance, governance, or financial health. The journey continues. The good news: you now understand what needs to be fixed. The SIVIO Institute's courses on sustainable CSOs and individual giving can help you fill those gaps.`;
+      } else {
+        type = 'fail'; icon = '📉';
+        title = 'Umoja Struggles. But the Learning Is Real.';
+        body = `The crisis exposed weaknesses that were always there — dependency on a single funder, weak governance, deferred compliance. Umoja is in difficulty. But this outcome is not a failure of mission — it is a call to rebuild differently. Play again and apply what you learned. The NGO of the future is built through iteration.`;
+      }
+      passages.outcome_final.body = outcomeHTML(type, icon, title, body);
+    },
+    choices: []
+  }
+
+};
+
+// ── INIT ──
+updateStats();
+render('start');
+</script>
+</body>
+</html>
